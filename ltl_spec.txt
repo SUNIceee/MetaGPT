@@ -1,20 +1,20 @@
-### LTL描述：Creating Data sources for Master Data of Characteristic "Product"
+### LTL描述：Creating Data Sources for Master Data of Characteristic "Product"
 
 **原子命题（Atomic Propositions）：**
-* `P1_ModelingArea`: 进入Data Warehousing Workbench的Modeling功能区域。
-* `P2_ChooseInfoProvider`: 选择Info Provider，显示Info Provider树。
-* `P3_CreateInfoCube`: 在Info Area的上下文菜单中选择Create Info Cube。
-* `P4_EnterCubeDetails`: 输入技术名称ZD_SALES和描述Sales Overview。
-* `P5_SelectCubeType`: 选择Standard Info Cube作为Info Provider类型并创建。
-* `P6_CreateNewDimension`: 在Dimensions文件夹的上下文菜单中选择Create New Dimensions。
-* `P7_EnterProductDimension`: 输入Product作为新维度的描述并选择Create Another Dimension。
-* `P8_EnterSalesOrgDimension`: 输入Sales Organization作为新维度的描述并选择Continue。
-* `P9_ChooseInfoObjectCatalog`: 在左侧工具栏中选择Info Object Catalog。
-* `P10_SelectCatalogTemplate`: 选择Info Object catalog作为模板并选择Continue。
+* `P1_ModelingArea`: 用户位于数据仓库工作台的建模功能区域。
+* `P2_ChooseInfoProvider`: 选择信息提供者，显示信息提供者树。
+* `P3_CreateInfoCube`: 在信息区域的上下文菜单中选择创建信息立方体。
+* `P4_EnterCubeDetails`: 输入技术名称`ZD_SALES`和描述`Sales Overview`。
+* `P5_SelectCubeType`: 选择标准信息立方体作为信息提供者类型并创建。
+* `P6_CreateNewDimensions`: 在维度文件夹的上下文菜单中选择创建新维度。
+* `P7_EnterProductDimension`: 输入维度描述`Product`并选择创建另一个维度。
+* `P8_EnterSalesOrgDimension`: 输入维度描述`Sales Organization`并选择继续。
+* `P9_ChooseInfoObjectCatalog`: 在左侧工具栏中选择信息对象目录。
+* `P10_SelectCatalogTemplate`: 选择特性信息对象目录作为模板并继续。
 * `P11_AssignCharacteristics`: 将特性分配给维度（拖放操作）。
-* `P12_ChooseDirectInput`: 在Sales Organization维度的上下文菜单中选择Info Object Direct Input。
-* `P13_EnterSalesDoc`: 输入特性0DOC_NUMBER（Sales Document）并选择Continue。
-* `P14_ActivateNavAttribute`: 展开Navigation Attributes文件夹并激活导航属性Product Group (ZD_PROD__ZDPGROUP)。
+* `P12_ChooseDirectInput`: 在维度`Sales Organization`的上下文菜单中选择信息对象直接输入。
+* `P13_EnterSalesDoc`: 输入特性`0DOC_NUMBER`（销售文档）并继续。
+* `P14_ActivateNavAttribute`: 展开导航属性文件夹，激活导航属性`Product Group (ZD_PROD__ZDPGROUP)`。
 
 **LTL公式：**
 * **顺序执行：**
@@ -22,8 +22,8 @@
   * `G(P2_ChooseInfoProvider => X(P3_CreateInfoCube))`
   * `G(P3_CreateInfoCube => X(P4_EnterCubeDetails))`
   * `G(P4_EnterCubeDetails => X(P5_SelectCubeType))`
-  * `G(P5_SelectCubeType => X(P6_CreateNewDimension))`
-  * `G(P6_CreateNewDimension => X(P7_EnterProductDimension))`
+  * `G(P5_SelectCubeType => X(P6_CreateNewDimensions))`
+  * `G(P6_CreateNewDimensions => X(P7_EnterProductDimension))`
   * `G(P7_EnterProductDimension => X(P8_EnterSalesOrgDimension))`
   * `G(P8_EnterSalesOrgDimension => X(P9_ChooseInfoObjectCatalog))`
   * `G(P9_ChooseInfoObjectCatalog => X(P10_SelectCatalogTemplate))`
@@ -31,9 +31,15 @@
   * `G(P11_AssignCharacteristics => X(P12_ChooseDirectInput))`
   * `G(P12_ChooseDirectInput => X(P13_EnterSalesDoc))`
   * `G(P13_EnterSalesDoc => X(P14_ActivateNavAttribute))`
+
 * **整体流程：**
-  * `F(P1_ModelingArea AND X(P2_ChooseInfoProvider AND X(P3_CreateInfoCube AND X(P4_EnterCubeDetails AND X(P5_SelectCubeType AND X(P6_CreateNewDimension AND X(P7_EnterProductDimension AND X(P8_EnterSalesOrgDimension AND X(P9_ChooseInfoObjectCatalog AND X(P10_SelectCatalogTemplate AND X(P11_AssignCharacteristics AND X(P12_ChooseDirectInput AND X(P13_EnterSalesDoc AND X(P14_ActivateNavAttribute))))))))))))`
+  * `F(P1_ModelingArea AND X(P2_ChooseInfoProvider AND X(P3_CreateInfoCube AND X(P4_EnterCubeDetails AND X(P5_SelectCubeType AND X(P6_CreateNewDimensions AND X(P7_EnterProductDimension AND X(P8_EnterSalesOrgDimension AND X(P9_ChooseInfoObjectCatalog AND X(P10_SelectCatalogTemplate AND X(P11_AssignCharacteristics AND X(P12_ChooseDirectInput AND X(P13_EnterSalesDoc AND X(P14_ActivateNavAttribute)))))))))))))`
 
 **LTL公式说明：**
-* **顺序执行**：每个公式表示前一个步骤完成后必须紧接着执行下一个步骤。例如，`G(P1_ModelingArea => X(P2_ChooseInfoProvider))`表示一旦进入Modeling功能区域，下一步必须选择Info Provider。
-* **整体流程**：该公式表示整个流程最终会完成所有步骤，从进入Modeling功能区域到激活导航属性Product Group。
+* **顺序执行公式**：每个公式表示当前步骤完成后必须紧接着执行下一步骤。例如，`G(P1_ModelingArea => X(P2_ChooseInfoProvider))`表示一旦用户位于建模功能区域，下一步必须选择信息提供者。
+* **整体流程公式**：表示整个流程最终会完成，即从进入建模功能区域开始，依次执行所有步骤，直到激活导航属性。
+
+**Conversion Steps:**
+1. **Identify Atomic Propositions**: 提取每个独立的步骤，并为每个步骤分配一个原子命题符号。
+2. **Define Temporal Relationships**: 分析步骤之间的时序关系，确定严格的执行顺序。
+3. **Construct LTL Formulas**: 使用LTL运算符（如`G`、`X`、`F`）构建公式，描述步骤之间的时序逻辑。
