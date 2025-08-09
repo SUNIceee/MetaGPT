@@ -1,11 +1,17 @@
 {
-  "name": "air_conditioner_remote",
-  "description": "A virtual air conditioner remote control that allows setting temperature, mode, and fan speed.",
+  "name": "air_conditioner_remote_control",
+  "description": "Simulates the basic functionality of an air conditioner remote control, allowing to turn on/off, set temperature, and change modes.",
   "inputs": [
+    {
+      "name": "power",
+      "type": "bool",
+      "description": "Turns the air conditioner on (True) or off (False).",
+      "default": false
+    },
     {
       "name": "temperature",
       "type": "int",
-      "description": "Desired temperature in Celsius.",
+      "description": "Sets the desired temperature in Celsius.",
       "default": 25,
       "constraints": [
         "16 <= temperature <= 30"
@@ -14,7 +20,7 @@
     {
       "name": "mode",
       "type": "str",
-      "description": "Operation mode of the air conditioner.",
+      "description": "Sets the operation mode of the air conditioner.",
       "default": "cool",
       "constraints": [
         "one of: 'cool', 'heat', 'dry', 'fan'"
@@ -23,22 +29,16 @@
     {
       "name": "fan_speed",
       "type": "str",
-      "description": "Speed of the fan.",
-      "default": "medium",
+      "description": "Sets the fan speed of the air conditioner.",
+      "default": "auto",
       "constraints": [
         "one of: 'low', 'medium', 'high', 'auto'"
       ]
-    },
-    {
-      "name": "power",
-      "type": "bool",
-      "description": "Power state of the air conditioner.",
-      "default": false
     }
   ],
   "output": {
     "type": "dict",
-    "description": "Current settings of the air conditioner."
+    "description": "Returns the current state of the air conditioner with all settings."
   },
   "exceptions": [
     {
@@ -53,38 +53,38 @@
   "examples": [
     {
       "input": {
+        "power": true,
         "temperature": 22,
         "mode": "cool",
-        "fan_speed": "medium",
-        "power": true
+        "fan_speed": "medium"
       },
       "output": {
+        "power": true,
         "temperature": 22,
         "mode": "cool",
-        "fan_speed": "medium",
-        "power": true
+        "fan_speed": "medium"
       },
-      "description": "Normal operation with custom settings."
+      "description": "Normal case, turns on the air conditioner with specified settings."
     },
     {
       "input": {
-        "power": true
+        "power": false
       },
       "output": {
+        "power": false,
         "temperature": 25,
         "mode": "cool",
-        "fan_speed": "medium",
-        "power": true
+        "fan_speed": "auto"
       },
-      "description": "Default settings with power on."
+      "description": "Turns off the air conditioner, other settings remain at defaults."
     },
     {
       "input": {
-        "temperature": 15,
-        "power": true
+        "power": true,
+        "temperature": 15
       },
       "output": "ValueError",
-      "description": "Temperature below minimum allowed (16)."
+      "description": "Temperature is below the minimum allowed, raises ValueError."
     }
   ]
 }

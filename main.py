@@ -3,12 +3,12 @@ import asyncio
 import sys
 from metagpt.schema import Message
 from metagpt.roles.designer_agent import DesignerAgent
-#from metagpt.config2 import Config
+from metagpt.config2 import Config
 
 
 async def main():
 
-    #config = Config.default()
+    config = Config.default()
     #print("\n--- LLM 相关环境变量 ---")
     #for key, value in os.environ.items():
     #    if "OPENAI" in key.upper() or "LLM" in key.upper() or "DEEPSEEK" in key.upper():
@@ -18,7 +18,7 @@ async def main():
     #print(f"当前 LLM 类型: {config.llm.api_type}")
     #print(f"模型: {config.llm.model}")
     #print(f"API 端点: {config.llm.base_url}")
-    #print(f"API Key (完整): {config.llm.api_key}")
+    print(f"API Key (完整): {config.llm.api_key}")
 
     #user_request = "生成一个空调遥控器说明。"
     # 从命令行或手动获取用户输入

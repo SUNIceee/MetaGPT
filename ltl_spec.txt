@@ -1,0 +1,39 @@
+### LTL描述：Creating Data sources for Master Data of Characteristic "Product"
+
+**原子命题（Atomic Propositions）：**
+* `P1_ModelingArea`: 进入Data Warehousing Workbench的Modeling功能区域。
+* `P2_ChooseInfoProvider`: 选择Info Provider，显示Info Provider树。
+* `P3_CreateInfoCube`: 在Info Area的上下文菜单中选择Create Info Cube。
+* `P4_EnterCubeDetails`: 输入技术名称ZD_SALES和描述Sales Overview。
+* `P5_SelectCubeType`: 选择Standard Info Cube作为Info Provider类型并创建。
+* `P6_CreateNewDimension`: 在Dimensions文件夹的上下文菜单中选择Create New Dimensions。
+* `P7_EnterProductDimension`: 输入Product作为新维度的描述并选择Create Another Dimension。
+* `P8_EnterSalesOrgDimension`: 输入Sales Organization作为新维度的描述并选择Continue。
+* `P9_ChooseInfoObjectCatalog`: 在左侧工具栏中选择Info Object Catalog。
+* `P10_SelectCatalogTemplate`: 选择Info Object catalog作为模板并选择Continue。
+* `P11_AssignCharacteristics`: 将特性分配给维度（拖放操作）。
+* `P12_ChooseDirectInput`: 在Sales Organization维度的上下文菜单中选择Info Object Direct Input。
+* `P13_EnterSalesDoc`: 输入特性0DOC_NUMBER（Sales Document）并选择Continue。
+* `P14_ActivateNavAttribute`: 展开Navigation Attributes文件夹并激活导航属性Product Group (ZD_PROD__ZDPGROUP)。
+
+**LTL公式：**
+* **顺序执行：**
+  * `G(P1_ModelingArea => X(P2_ChooseInfoProvider))`
+  * `G(P2_ChooseInfoProvider => X(P3_CreateInfoCube))`
+  * `G(P3_CreateInfoCube => X(P4_EnterCubeDetails))`
+  * `G(P4_EnterCubeDetails => X(P5_SelectCubeType))`
+  * `G(P5_SelectCubeType => X(P6_CreateNewDimension))`
+  * `G(P6_CreateNewDimension => X(P7_EnterProductDimension))`
+  * `G(P7_EnterProductDimension => X(P8_EnterSalesOrgDimension))`
+  * `G(P8_EnterSalesOrgDimension => X(P9_ChooseInfoObjectCatalog))`
+  * `G(P9_ChooseInfoObjectCatalog => X(P10_SelectCatalogTemplate))`
+  * `G(P10_SelectCatalogTemplate => X(P11_AssignCharacteristics))`
+  * `G(P11_AssignCharacteristics => X(P12_ChooseDirectInput))`
+  * `G(P12_ChooseDirectInput => X(P13_EnterSalesDoc))`
+  * `G(P13_EnterSalesDoc => X(P14_ActivateNavAttribute))`
+* **整体流程：**
+  * `F(P1_ModelingArea AND X(P2_ChooseInfoProvider AND X(P3_CreateInfoCube AND X(P4_EnterCubeDetails AND X(P5_SelectCubeType AND X(P6_CreateNewDimension AND X(P7_EnterProductDimension AND X(P8_EnterSalesOrgDimension AND X(P9_ChooseInfoObjectCatalog AND X(P10_SelectCatalogTemplate AND X(P11_AssignCharacteristics AND X(P12_ChooseDirectInput AND X(P13_EnterSalesDoc AND X(P14_ActivateNavAttribute))))))))))))`
+
+**LTL公式说明：**
+* **顺序执行**：每个公式表示前一个步骤完成后必须紧接着执行下一个步骤。例如，`G(P1_ModelingArea => X(P2_ChooseInfoProvider))`表示一旦进入Modeling功能区域，下一步必须选择Info Provider。
+* **整体流程**：该公式表示整个流程最终会完成所有步骤，从进入Modeling功能区域到激活导航属性Product Group。
