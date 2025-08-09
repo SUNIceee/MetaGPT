@@ -1,0 +1,90 @@
+{
+  "name": "air_conditioner_remote",
+  "description": "A virtual air conditioner remote control that allows setting temperature, mode, and fan speed.",
+  "inputs": [
+    {
+      "name": "temperature",
+      "type": "int",
+      "description": "Desired temperature in Celsius.",
+      "default": 25,
+      "constraints": [
+        "16 <= temperature <= 30"
+      ]
+    },
+    {
+      "name": "mode",
+      "type": "str",
+      "description": "Operation mode of the air conditioner.",
+      "default": "cool",
+      "constraints": [
+        "one of: 'cool', 'heat', 'dry', 'fan'"
+      ]
+    },
+    {
+      "name": "fan_speed",
+      "type": "str",
+      "description": "Speed of the fan.",
+      "default": "medium",
+      "constraints": [
+        "one of: 'low', 'medium', 'high', 'auto'"
+      ]
+    },
+    {
+      "name": "power",
+      "type": "bool",
+      "description": "Power state of the air conditioner.",
+      "default": false
+    }
+  ],
+  "output": {
+    "type": "dict",
+    "description": "Current settings of the air conditioner."
+  },
+  "exceptions": [
+    {
+      "type": "ValueError",
+      "condition": "Temperature is outside the allowed range (16-30)."
+    },
+    {
+      "type": "ValueError",
+      "condition": "Invalid mode or fan speed is provided."
+    }
+  ],
+  "examples": [
+    {
+      "input": {
+        "temperature": 22,
+        "mode": "cool",
+        "fan_speed": "medium",
+        "power": true
+      },
+      "output": {
+        "temperature": 22,
+        "mode": "cool",
+        "fan_speed": "medium",
+        "power": true
+      },
+      "description": "Normal operation with custom settings."
+    },
+    {
+      "input": {
+        "power": true
+      },
+      "output": {
+        "temperature": 25,
+        "mode": "cool",
+        "fan_speed": "medium",
+        "power": true
+      },
+      "description": "Default settings with power on."
+    },
+    {
+      "input": {
+        "temperature": 15,
+        "power": true
+      },
+      "output": "ValueError",
+      "description": "Temperature below minimum allowed (16)."
+    }
+  ]
+}

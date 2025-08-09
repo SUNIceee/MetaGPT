@@ -1,4 +1,3 @@
-# D:\metagpt\MetaGPT\main.py
 import os
 import asyncio
 import sys
